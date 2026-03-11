@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Tracker</title>
+    <link rel="stylesheet" href="1stex.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Add a Movie</h2>
+        
+        <div class="form-group">
+            <label>Title:</label>
+            <input type="text" id="movieTitle">
+        </div>
+
+        <div class="form-group">
+            <label>Year:</label>
+            <input type="number" id="movieYear">
+        </div>
+
+        <div class="form-group">
+            <label>Genre:</label>
+            <select id="movieGenre">
+                <option value="Action">Action</option>
+                <option value="Drama">Drama</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+                <option value="Horror">Horror</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Rating:</label>
+            <div id="star-input-container">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+            </div>
+        </div>
+
+        <button id="addBtn">Add Movie</button>
+
+        <hr>
+
+        <h2>Movie List</h2>
+        <div id="movieList">
+            </div>
+    </div>
+
+    <script src="1stex.js"></script>
+</body>
+</html>

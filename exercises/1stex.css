@@ -1,0 +1,231 @@
+
+@font-face {
+    font-family: 'MainFont';
+    src: url('../LOVELETTERS.ttf'); 
+}
+
+@font-face {
+    font-family: 'HeaderFont';
+    src: url('../Buttons.ttf');
+}
+
+/* === BODY + BACKGROUND === */
+body {
+    font-family: 'MainFont', cursive, sans-serif;
+    background-color: #fff5f8;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+
+@keyframes floatStar {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-14px) rotate(15deg); }
+}
+
+/* === MAIN CARD === */
+.container {
+    background: white;
+    padding: 35px 30px;
+    border-radius: 28px;
+    /* layered shadow fugly */
+    box-shadow:
+        6px 6px 0px #ffb7ce,
+        12px 12px 0px #b7e8ff,
+        0 20px 40px rgba(0,0,0,0.07);
+    width: 380px;
+    position: relative;
+    z-index: 1;
+    transform: rotate(-0.4deg);
+}
+
+/* === HEADINGS === */
+h2 {
+    font-family: 'HeaderFont', cursive, sans-serif;
+    color: #444;
+    text-align: center;
+    margin-bottom: 22px;
+    /* underline doodle effect */
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+/* underline on h2 */
+h2:first-of-type::after {
+    content: '';
+    display: block;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6eb4, #ffd36e, #7de8f5, #b9f56e, #d08ef5);
+    border-radius: 4px;
+    margin-top: 6px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+hr {
+    border: none;
+    border-top: 2px dashed #f0d0e0; /* dashed pink divider */
+    margin: 22px 0;
+}
+
+/* === FORM STUFF === */
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 4px;
+    padding-left: 4px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px 13px;
+    border: 2px solid #f2e0eb;
+    border-radius: 14px;
+    font-family: 'MainFont', cursive, sans-serif;
+    background: #fffafc;
+    outline: none;
+    font-size: 0.95rem;
+    color: #555;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+input:focus, select:focus {
+    border-color: #ffb7ce;
+}
+
+/* === STAR RATING INPUT === */
+#star-input-container {
+    font-size: 30px;
+    display: flex;
+    gap: 6px;
+    cursor: pointer;
+    padding: 4px 2px;
+}
+
+.star {
+    position: relative;
+    color: #e8e0f0; /* grey-ish purple when empty */
+    transition: transform 0.1s, color 0.1s;
+    user-select: none;
+}
+
+.star:hover { transform: scale(1.2); }
+
+/* full star - golden yellow */
+.star.full { color: #ffd36e; }
+
+/* half star hack - overlay trick  i love google i love reddit */
+.star.half { color: #e8e0f0; }
+.star.half::after {
+    content: '★';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    overflow: hidden;
+    color: #ffd36e;
+}
+
+/* === ADD BUTTON === */
+#addBtn {
+    width: 100%;
+    padding: 13px;
+    margin-top: 18px;
+    /* gradient goes pink -> purple */
+    background: linear-gradient(135deg, #ffb7ce 0%, #d08ef5 100%);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-family: 'HeaderFont', cursive, sans-serif;
+    font-size: 1.15rem;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    box-shadow: 3px 3px 0px #b57fc9; /* harsh shadow */
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+#addBtn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px #b57fc9;
+}
+
+#addBtn:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px #b57fc9;
+}
+
+/* === MOVIE CARDS IN LIST === */
+.movie-card {
+    border-bottom: 1.5px dashed #f5dcea;
+    padding: 13px 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+
+    animation: popIn 0.25s ease;
+}
+
+@keyframes popIn {
+    from { transform: scale(0.93); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.movie-info { flex: 1; }
+
+/* genre tag bg color thing */
+.genre-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    padding: 2px 9px;
+    border-radius: 20px;
+    margin-top: 4px;
+    font-family: 'MainFont', cursive;
+    font-weight: bold;
+    /* colors assigned in JS */
+}
+
+/* star display in movie cards */
+.card-stars { color: #ffd36e; letter-spacing: 1px; font-size: 0.9rem; }
+.card-stars .empty-star { color: #e8e0f0; }
+
+/* === DELETE BUTTON on each card === */
+.delete-btn {
+    background: none;
+    border: 2px solid #ffb7ce;
+    border-radius: 10px;
+    color: #ff6eb4;
+    font-size: 0.8rem;
+    font-family: 'MainFont', cursive, sans-serif;
+    cursor: pointer;
+    padding: 3px 9px;
+    flex-shrink: 0;
+    transition: background 0.15s, color 0.15s, transform 0.1s;
+    margin-top: 2px;
+}
+
+.delete-btn:hover {
+    background: #ff6eb4;
+    color: white;
+    transform: rotate(-3deg); /* lil wiggle on hover */
+}
+
+/* empty state msg */
+.empty-msg {
+    text-align: center;
+    color: #ccc;
+    font-size: 0.9rem;
+    padding: 20px 0 10px;
+}

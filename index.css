@@ -1,0 +1,406 @@
+/* ============================================================
+   Rei's Portfolio — index.css
+   Fonts: Buttons.ttf (local), Sour Gummy (Google Fonts, for jelly text)
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Sour+Gummy:wdth,wght@100..125,100..900&display=swap");
+
+@font-face {
+    font-family: "Buttons";
+    src: url("Buttons.ttf") format("truetype");
+}
+
+/* ---- CSS variables ---- */
+:root {
+    /* from CodePen @mike-at-redspace — jelly animation physics */
+    --jelly-duration: 0.9s;
+    --stagger: 0.035s;
+    --easing: cubic-bezier(0.25, 1, 0.5, 1);
+
+    --squash-scale-x: 1.35;
+    --squash-scale-y: 0.65;
+    --squash-ty: 12%;
+    --stretch-scale-x: 0.75;
+    --stretch-scale-y: 1.35;
+    --stretch-ty: -22%;
+    --overshoot-scale-x: 1.15;
+    --overshoot-scale-y: 0.85;
+    --overshoot-ty: 6%;
+    --settle1-scale-x: 0.92;
+    --settle1-scale-y: 1.08;
+    --settle1-ty: -3%;
+    --settle2-scale-x: 1.03;
+    --settle2-scale-y: 0.97;
+    --settle2-ty: 1%;
+
+    --base-wght: 700;
+    --base-wdth: 85;
+    --squash-wght: 900;
+    --squash-wdth: 80;
+    --stretch-wght: 450;
+    --stretch-wdth: 90;
+
+    /* palette */
+    --col-yellow: #ffd966;
+    --col-pink: #ff79b0;
+    --col-teal: #7de8d8;
+    --col-purple: #c49bf5;
+    --col-green: #9de876;
+    --col-orange: #ffaa55;
+
+    --col-text: #3a3560;
+    --col-muted: #9990bb;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+}
+
+body {
+    margin: 0;
+    font-family: "Buttons", cursive, sans-serif;
+    background: transparent;
+    color: var(--col-text);
+    overflow-x: hidden;
+}
+
+/* ============================================================
+   BACKGROUND CANVAS
+   Fixed behind everything. index.js draws the pastel rainbow,
+   parallax swirling spirals, and floating stars on this canvas.
+   ============================================================ */
+#bgCanvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ============================================================
+   PAGES
+   ============================================================ */
+.page {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 24px 40px;
+    background: transparent;
+}
+
+/* ============================================================
+   HERO PAGE
+   ============================================================ */
+
+/* from CodePen @mike-at-redspace — jelly h1 */
+.hero h1 {
+    font-family: "Sour Gummy", system-ui, sans-serif;
+    font-size: clamp(42px, 11vw, 160px);
+    letter-spacing: -0.02em;
+    margin: 0;
+    user-select: none;
+    cursor: pointer;
+    line-height: 1;
+    text-align: center;
+}
+
+/* from CodePen @mike-at-redspace — force-jelly trigger class */
+.hero h1.force-jelly .letter {
+    animation: jelly var(--jelly-duration) var(--easing) forwards;
+    animation-delay: calc(var(--i, 0) * var(--stagger));
+}
+
+.scroll-hint {
+    margin-top: 48px;
+    font-size: 0.9rem;
+    color: var(--col-muted);
+    letter-spacing: 0.08em;
+    animation: nudge 2.2s ease-in-out infinite;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 6px 16px;
+    border-radius: 20px;
+}
+
+@keyframes nudge {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(6px);
+    }
+}
+
+/* ============================================================
+   WORK / EXERCISES PAGE
+   ============================================================ */
+.page-work {
+    justify-content: flex-start;
+    padding-top: 80px;
+    gap: 40px;
+}
+
+.section-title {
+    font-family: "Buttons", cursive;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    color: var(--col-muted);
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+    margin: 0;
+    position: relative;
+    background: rgba(255, 255, 255, 0.55);
+    padding: 6px 22px 8px;
+    border-radius: 30px;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--col-pink), var(--col-purple));
+    margin: 8px auto 0;
+}
+
+/* ---- card grid ---- */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 28px;
+    width: 100%;
+    max-width: 860px;
+}
+
+/* ---- individual card ---- */
+.work-card {
+    text-decoration: none;
+    color: var(--col-text);
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow:
+        4px 4px 0 rgba(255, 217, 102, 0.7),
+        8px 8px 0 rgba(255, 217, 102, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transform: rotate(-0.6deg);
+    padding-bottom: 4px;
+}
+
+.work-card:nth-child(2) {
+    transform: rotate(0.5deg);
+}
+
+.work-card:nth-child(3) {
+    transform: rotate(-0.3deg);
+}
+
+.work-card:not(.is-empty):hover {
+    transform: translateY(-6px) rotate(0deg);
+    box-shadow:
+        6px 6px 0 rgba(255, 121, 176, 0.7),
+        12px 12px 0 rgba(255, 121, 176, 0.2);
+}
+
+/* ---- cat logo area — no bg, pure transparent PNG ---- */
+.card-cat {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 20px 10px;
+    /* no background — the card's white shows through, or nothing */
+}
+
+.card-cat img {
+    max-width: 100%;
+    max-height: 160px;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.work-card:not(.is-empty):hover .card-cat img {
+    transform: scale(1.06) rotate(-2deg);
+}
+
+/* empty placeholder cat area */
+.empty-cat {
+    height: 120px;
+    font-size: 0.78rem;
+    color: var(--col-muted);
+    letter-spacing: 0.08em;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* card body */
+.card-body {
+    padding: 10px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-num {
+    font-size: 0.68rem;
+    color: var(--col-muted);
+    letter-spacing: 0.15em;
+}
+
+.card-body h3 {
+    margin: 0;
+    font-family: "Buttons", cursive;
+    font-size: 1.05rem;
+    color: var(--col-text);
+}
+
+.card-body p {
+    margin: 4px 0 0;
+    font-size: 0.8rem;
+    color: var(--col-muted);
+    line-height: 1.5;
+}
+
+.is-empty .card-body h3,
+.is-empty .card-body p {
+    color: #ccc;
+}
+
+/* ============================================================
+   FOOTER CREDIT
+   ============================================================ */
+.credit {
+    font-size: 0.75rem;
+    color: var(--col-muted);
+    text-align: center;
+    letter-spacing: 0.05em;
+    background: rgba(255, 255, 255, 0.45);
+    padding: 10px 24px;
+    border-radius: 20px;
+}
+
+.credit a {
+    color: var(--col-purple);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--col-purple);
+}
+
+.credit a:hover {
+    color: var(--col-pink);
+    border-color: var(--col-pink);
+}
+
+/* ============================================================
+   JELLY LETTER STYLES
+   from CodePen @mike-at-redspace — not my original work
+   ============================================================ */
+.letter {
+    display: inline-block;
+    position: relative;
+    color: var(--c);
+    font-variation-settings: "wght" var(--base-wght), "wdth" var(--base-wdth);
+    opacity: 0.75;
+
+    text-shadow:
+        -0.005em -0.005em 0 oklch(100% 0 0 / 0.4),
+        0.005em 0.01em 0 oklch(from var(--cs) l c h / 0.3),
+        0.01em 0.03em 0 oklch(from var(--cs) l c h / 0.3),
+        0.01em 0.02em 0.03em var(--c);
+}
+
+/* from CodePen @mike-at-redspace */
+.letter::before {
+    content: attr(data-char);
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, transparent 35%, var(--cs) 110%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* from CodePen @mike-at-redspace */
+.letter::after {
+    content: attr(data-char);
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(105deg, transparent 20%, oklch(100% 0 0 / 0.9) 22%, oklch(100% 0 0 / 0.6) 24%, transparent 28%),
+        radial-gradient(ellipse 35% 15% at 28% 18%, oklch(100% 0 0 / 0.8) 0%, oklch(100% 0 0 / 0.15) 35%, transparent 50%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    mix-blend-mode: color-dodge;
+    pointer-events: none;
+    z-index: 2;
+    filter: blur(0.04em);
+}
+
+.letter.is-jiggling {
+    animation: jelly var(--jelly-duration) var(--easing) forwards;
+    animation-delay: 0s;
+}
+
+/* from CodePen @mike-at-redspace — keyframes */
+@keyframes jelly {
+
+    0%,
+    100% {
+        transform: scale(1, 1) translateY(0);
+        font-variation-settings: "wght" var(--base-wght), "wdth" var(--base-wdth);
+        opacity: 0.75;
+    }
+
+    12% {
+        transform: scale(var(--squash-scale-x), var(--squash-scale-y)) translateY(var(--squash-ty));
+        font-variation-settings: "wght" var(--squash-wght), "wdth" var(--squash-wdth);
+        opacity: .9;
+    }
+
+    28% {
+        transform: scale(var(--stretch-scale-x), var(--stretch-scale-y)) translateY(var(--stretch-ty));
+        font-variation-settings: "wght" var(--stretch-wght), "wdth" var(--stretch-wdth);
+        opacity: 0.60;
+    }
+
+    45% {
+        transform: scale(var(--overshoot-scale-x), var(--overshoot-scale-y)) translateY(var(--overshoot-ty));
+        font-variation-settings: "wght" 800, "wdth" 110;
+        opacity: 0.75;
+    }
+
+    65% {
+        transform: scale(var(--settle1-scale-x), var(--settle1-scale-y)) translateY(var(--settle1-ty));
+        font-variation-settings: "wght" 200, "wdth" 100;
+        opacity: 0.75;
+    }
+
+    82% {
+        transform: scale(var(--settle2-scale-x), var(--settle2-scale-y)) translateY(var(--settle2-ty));
+        font-variation-settings: "wght" 600, "wdth" 105;
+        opacity: 0.75;
+    }
+}

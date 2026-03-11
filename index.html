@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rei's Portfolio</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <!-- fixed parallax canvas — stars and swirls drawn here by JS -->
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+
+  <!-- ===== LANDING / HERO ===== -->
+  <section class="page page-hero" id="hero">
+
+    <div class="hero">
+      <!-- from CodePen @mike-at-redspace — jelly text animation, not my original work -->
+      <h1 aria-label="Rei's Portfolio">Rei's Portfolio</h1>
+    </div>
+
+    <p class="scroll-hint">scroll down ↓</p>
+  </section>
+
+  <!-- ===== EXERCISES PAGE ===== -->
+  <section class="page page-work" id="work">
+
+    <h2 class="section-title">exercises</h2>
+
+    <div class="card-grid">
+
+      <!-- Exercise 01 — cat png is the logo, no container bg -->
+      <a class="work-card" href="exercises/1stex.html">
+        <div class="card-cat">
+          <img src="assets/cat1.png" alt="Exercise 01 — Movie Tracker" />
+        </div>
+        <div class="card-body">
+          <span class="card-num">01</span>
+          <h3>Movie Tracker</h3>
+          <p>A lil app to log, rate &amp; delete the movies you've watched.</p>
+        </div>
+      </a>
+
+      <!-- placeholder cards -->
+      <div class="work-card is-empty">
+        <div class="card-cat empty-cat">
+          <span>coming soon ✦</span>
+        </div>
+        <div class="card-body">
+          <span class="card-num">02</span>
+          <h3>???</h3>
+          <p>Something new is cooking...</p>
+        </div>
+      </div>
+
+      <div class="work-card is-empty">
+        <div class="card-cat empty-cat">
+          <span>coming soon ✦</span>
+        </div>
+        <div class="card-body">
+          <span class="card-num">03</span>
+          <h3>???</h3>
+          <p>Stay tuned :-)</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- credit at the very bottom -->
+    <footer class="credit">
+      jelly text animation from <a href="https://codepen.io/mike-at-redspace" target="_blank" rel="noopener">@mike-at-redspace</a> on CodePen — not my original work ✦
+    </footer>
+
+  </section>
+
+  <script src="index.js"></script>
+</body>
+</html>

@@ -119,7 +119,7 @@ footer a {
     width: 32px;
     height: 32px;
     display: inline-block;
-    background: url('sprites.png') no-repeat;
+    background: url('images/sprites.png') no-repeat;
 }
 
 .facebook {

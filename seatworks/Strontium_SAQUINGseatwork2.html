@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="author" content="<Rei Saquing - 9-Strontium >" />
+  <meta name="revised" content="<March 30, 2026>" />
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .header, .footer {
+      background: lightblue;
+      padding: 10px;
+    }
+    .footer {
+       opacity: 0.5;
+       position: fixed; bottom: 0; width: 100%;
+       /* Guided Question: What changed compared to the default static positioning? 
+       Try to give different values to top and left or you can change it to bottom, right. */
+         /* REI'S ANSWER: 
+         The footer is fixed at the bottom of the page so it won't move when you scroll. */ 
+    }
+    .sidebar {
+      background: lightgreen;
+      width: 150px;
+      height: 200px;
+      position: relative; top: 20px; left: 20px;
+      /* Guided Question: What happens when you scroll the page? 
+      Why does the footer behave differently from position relative?*/ 
+
+         /* REI'S ANSWER: 
+         The footer stays at the bottom of the page even when you scroll
+         while the sidebar scrolls with the content.
+
+         This is because the footer has a fixed position, 
+         which means it does not move when you scroll. 
+         The sidebarhas a relative position, which means it is positioned relative 
+         to its normal position and will move when you scroll. */
+    }
+    .content {
+      background: lightyellow;
+      width: 300px;
+      height: 200px;
+      position: absolute; top: 66px; left: 200px;
+      /* Guided Question: What is the effect of position: absolute on an element? How is it different from fixed? */
+            /* REI'S ANSWER: 
+            An element with position: absolute is:
+                positioned relative to its nearest positioned ancestor 
+                (which is up the heirarchy of elements that has other values other than the default ones)
+            An element with position: fixed is: 
+                positioned relative to the viewport
+            This means that an absolutely positioned element will move when you scroll, 
+            while a fixed element will stay in the same place on the screen. */
+    }    
+    .notice {
+    position: absolute;
+    top: 60px;
+    left: 400px;
+    background: orange;
+    padding: 10px;
+    z-index: 1;
+    /* Guided Question: Why does the notice appear on top of the content? 
+    What happens if you swap the z‑index values? */
+
+    /* REI'S ANSWER:
+    The notice appears on top of the content because it has a higher z-index value
+    than the content which has a default z-index of 0.
+    If you swap the z-index values, the content will appear on top of the notice instead,
+    making the notice hidden behind the content. */
+
+
+}
+  </style>
+</head>
+<body>
+  <div class="header">Header</div>
+  <div class="sidebar">Sidebar</div>
+  <div class="content">Main Content</div>
+  <div class="footer">Footer</div>
+  <div class="notice">Notice!</div>
+</body>
+</html>
